@@ -18,3 +18,7 @@ jobs:
         python-version: '3.11'
     - name: Check syntax  # Simple step that always passes if no errors
       run: python -m py_compile *.py  # Scans Python files (add some if needed)
+- name: Check syntax
+  run: |
+    echo 'print("Hello, CI!")' > hello.py  # Creates dummy file
+    python -m py_compile hello.py
