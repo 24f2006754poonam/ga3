@@ -1,0 +1,20 @@
+name: CI  # Name your workflow (use no spaces for badge reliability)
+
+on:
+  push:  # Runs on code pushes
+    branches: [ main ]  # Or your default branch
+  pull_request:  # Runs on PRs
+    branches: [ main ]
+  workflow_dispatch:  # Lets you trigger manually—key for testing! [web:1]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Free GitHub runner
+    steps:
+    - uses: actions/checkout@v4  # Grabs your code
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Check syntax  # Simple step that always passes if no errors
+      run: python -m py_compile *.py  # Scans Python files (add some if needed)
