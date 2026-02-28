@@ -1,0 +1,32 @@
+name: Daily Update
+
+on:
+  schedule:
+    # Example: runs once per day at 15:25 UTC (3:25 PM UTC)
+    - cron: "25 15 * * *"
+
+  # Allow manual triggering too (nice for testing)
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate daily update (24f2006754@ds.study.iitm.ac.in)
+        run: |
+          echo "---" >> daily-status.md
+          echo "Update on $(date -u)" >> daily-status.md
+          echo "Triggered by 24f2006754@ds.study.iitm.ac.in" >> daily-status.md
+          echo "---" >> daily-status.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add daily-status.md
+          git commit -m "Daily update - $(date -u)"
+          git push
