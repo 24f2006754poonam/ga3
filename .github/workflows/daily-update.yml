@@ -1,12 +1,5 @@
 name: Daily Update
 
-on:
-  schedule:
-    # Example: runs once per day at 15:25 UTC (3:25 PM UTC)
-    - cron: "25 15 * * *"
-
-  # Allow manual triggering too (nice for testing)
-  workflow_dispatch:
 
 jobs:
   update:
